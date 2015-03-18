@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Nouwweb tweets</title>
+</head>
+
+<body>
+
+
+	<div id="rate_limit"></div>
+
+	<div id="tweets"></div>
+
+</div>
+
+
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery.js"></script>
+<!-- Bootstrap JavaScript -->
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/codebird.js"></script>
+<script type="text/javascript" src="js/pretty.js"></script>
+
+<script type="text/javascript">
+var cb = new Codebird;
+cb.setConsumerKey("nEg0NiyEV5QEV7Bgok3QCNhdi", "GwVAdwmA7zzIJUgArf6hPtXjZIkQhwSBSuZ8i0S6WAc49Qzm2q");
+cb.setToken("19604531-vlMk2Day3kJMP0N7W5ckNOWu7kIvzoYTak89FBeTd", "mqdluKcDJ30WC4LJkSaKklNuOn7JZw50is1cFeYw4nXJB");
+
+
+$.getJSON('http://api.nouwweb.pw/search?twitter=true', function(data) {
+	$.each(data, function(index) {
+
+		var twitter_name = data[index].twitter.split("https://twitter.com/").pop(); 
+
+		var params = {
+			screen_name: twitter_name,
+			count: 3
+
+		};
+
+		cb.__call(
+			"statuses_userTimeline",
+			params,
+			function(reply, rate_limit_status) {
+
+				if (reply.httpstatus == 200) {
+
+					$("#tweets").append('@' + twitter_name.toLowerCase());
+
+					for (i = 0; i <= 3; i++) {
+						console.log(reply[i]);
+						$("#tweets").append(prettyDate (reply[i].created_at) + ' - ' + reply[i].text);
+					}
+				
+
+				} else {
+					$("#rate_limit").text("twitter rate limit reached");
+				}
+
+
+
+			}
+			);
+
+
+	});
+});
+</script>
+
+</body>
+
+</html>

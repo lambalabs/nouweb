@@ -1,0 +1,7 @@
+README
+
+Uses http://openleb.io/ API to find politicians with twitter accounts and displays their latest x tweets.
+
+Reaching twitter API limit too fast.
+
+coded during Lamba Labs build night.
