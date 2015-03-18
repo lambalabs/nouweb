@@ -20,8 +20,7 @@
 
 <!-- jQuery -->
 <script src="//code.jquery.com/jquery.js"></script>
-<!-- Bootstrap JavaScript -->
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+ 
 <script type="text/javascript" src="js/codebird.js"></script>
 <script type="text/javascript" src="js/pretty.js"></script>
 
@@ -38,7 +37,7 @@ $.getJSON('http://api.nouwweb.pw/search?twitter=true', function(data) {
 
 		var params = {
 			screen_name: twitter_name,
-			count: 3
+			count: 3 //showing latest 3 tweets to avoid rate limits, ideally 5 or 10.
 
 		};
 
